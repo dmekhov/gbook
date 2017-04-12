@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\UserParams;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +13,8 @@ class CommentController extends Controller
 
     public function index()
     {
-        $items = Comment::latest()->paginate(5);
+        $items_per_page = UserParams::getInstance()->getItemsPerPage();
+        $items = Comment::latest()->paginate($items_per_page);
         return view('comment.index', compact('items'));
     }
 
@@ -32,5 +34,17 @@ class CommentController extends Controller
         }
 
         return redirect('/');
+    }
+
+
+    public function perPage()
+    {
+        if(session('per_page') == 10) {
+            session(['per_page' => 5 ]);
+        } else {
+            session(['per_page' => 10 ]);
+        }
+
+        return redirect()->back();
     }
 }

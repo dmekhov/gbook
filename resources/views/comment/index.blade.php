@@ -13,7 +13,23 @@
                     </div>
                 @endforeach
 
-                {!! $items->render() !!}
+                <div class="paginate-block">
+                    <div class="pages">{!! $items->render() !!}</div>
+                    @if($items->lastPage() > 1)
+                    <div class="pagination per-page-toggle">
+                        <a href="{{ url('/per-page-toggle') }}" class="btn btn-default"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('per-page-toggle').submit();">
+                            @if($items_per_page = App\UserParams::getInstance()->getItemsPerPage() == 5){{10}}@else{{5}}@endif per page
+                        </a>
+
+                        <form id="per-page-toggle" action="{{ url('per-page-toggle') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
+                    @endif
+                </div>
+
 
                 @include('errors._list')
 
