@@ -17,4 +17,4 @@ Route::get('/', 'CommentController@index');
 Route::post('/comment', 'CommentController@store');
 Route::match(['GET','POST'], '/per-page-toggle', 'CommentController@perPage');
 Route::get('/user/{user}', 'UserController@show');
-Route::get('/personal', 'UserController@personal')->middleware('auth');
+Route::get('/personal', 'UserController@show')->middleware('auth');
