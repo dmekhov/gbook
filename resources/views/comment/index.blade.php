@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1>Guest Messages</h1>
+                <h1>Guest Book</h1>
 
                 @foreach($items as $item)
                     <div class="gbook-message panel panel-default">
-                        <div class="panel-heading">{{$item->user ? $item->user->name : 'Guest'}}</div>
+                        <div class="panel-heading">{{$item->user ? link_to('/user/'.$item->user->id, $item->user->name) : 'Guest'}}</div>
                         <div class="panel-body"><div class="gbook-message__text">{{$item->text}}</div></div>
                     </div>
                 @endforeach

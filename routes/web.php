@@ -15,3 +15,5 @@ Auth::routes();
 
 Route::get('/', 'CommentController@index');
 Route::post('/comment', 'CommentController@store');
+Route::get('/user/{user}', 'UserController@show');
+Route::get('/personal', 'UserController@personal')->middleware('auth');

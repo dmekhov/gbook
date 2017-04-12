@@ -14,7 +14,6 @@ class UserController extends Controller
 
     public function personal()
     {
-        if(Auth::guest()) return abort(403, 'Unauthorized action.');
         $user = Auth::user();
         return view('user.show', compact('user'));
     }
