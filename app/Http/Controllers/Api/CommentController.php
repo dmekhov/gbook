@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -11,5 +13,20 @@ class CommentController extends Controller
     {
         $items = Comment::latest()->leftJoin("users", "users.id", "=", "comments.user_id")->get(['users.name as username', 'comments.*']);
         return $items;
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request, ['text'=>'required',]);
+
+        if(Auth::user()) {
+            $comment = Auth::user()->comments()->create($request->all())->toArray();
+            $comment['username'] = Auth::user()->name;
+        } else {
+            $comment = Comment::create($request->all());
+        }
+
+        return $comment;
     }
 }
