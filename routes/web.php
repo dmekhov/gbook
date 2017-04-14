@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('frontend/layout');
 });
 
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
+    Route::get('/comments', 'CommentController@index');
+});
+
 Route::post('/comment', 'CommentController@store');
 Route::match(['GET','POST'], '/per-page-toggle', 'CommentController@perPage');
 Route::get('/user/{user}', 'UserController@show');
