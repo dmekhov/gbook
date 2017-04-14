@@ -13,7 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'CommentController@index');
+Route::get('/', function () {
+    return view('frontend/layout');
+});
+
 Route::post('/comment', 'CommentController@store');
 Route::match(['GET','POST'], '/per-page-toggle', 'CommentController@perPage');
 Route::get('/user/{user}', 'UserController@show');
