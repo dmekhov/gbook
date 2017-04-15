@@ -1,7 +1,7 @@
 import './bootstrap';
-import Index from './views/Index'
+import router from './routes';
 
 new Vue({
     el: '#app',
-    components: { Index }
+    router: router
 });

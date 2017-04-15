@@ -38,9 +38,9 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <router-link to="/" exact class="navbar-brand">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </router-link>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -62,7 +62,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('personal') }}">Personal area</a></li>
+                                <li><router-link to="/personal">Personal area</router-link></li>
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -81,7 +81,7 @@
             </div>
         </div>
     </nav>
-<index></index>
+    <router-view></router-view>
 </div>
 
 <!-- Scripts -->

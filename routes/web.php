@@ -21,6 +21,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     Route::get('/comment', 'CommentController@index');
     Route::post('/comment', 'CommentController@store');
     Route::get('/user/get-username', 'UserController@getUsername');
+	Route::get('/user/{user}', 'UserController@show');
+	Route::get('/personal', 'UserController@show')->middleware('auth');
 });
 
 Route::post('/comment', 'CommentController@store');

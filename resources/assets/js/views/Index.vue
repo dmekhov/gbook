@@ -5,7 +5,7 @@
 				<h1>Guest Book</h1>
 				
 				<div class="panel panel-default" v-for="comment in comments">
-					<div class="panel-heading"><a v-if="comment.username" :href="'/user/' + comment.user_id">{{ comment.username }}</a><template v-else>Guest</template></div>
+                    <div class="panel-heading"><router-link v-if="comment.username" :to="'/user/'+comment.user_id" v-text="comment.username"></router-link><template v-else>Guest</template></div>
 					
 					<div class="panel-body" v-text="comment.text"></div>
 				</div>
