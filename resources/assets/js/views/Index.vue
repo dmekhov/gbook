@@ -9,6 +9,8 @@
 					
 					<div class="panel-body" v-text="comment.text"></div>
 				</div>
+
+                <vue-paginator :resource_url="resource_url" ref="vpaginator" @update="updateResource" class="pagination"></vue-paginator>
 				
 				<add-comment v-bind:user="user" @completed="addComment"></add-comment>
 			</div>
@@ -20,18 +22,20 @@
 	import AddComment from '../components/AddComment.vue';
 
     export default {
-        components: { AddComment },
-        
+        components: {
+            AddComment,
+            VuePaginator
+        },
+
         data() {
             return {
                 comments: [],
+                resource_url: '/api/comment',
 				user: 'Guest',
             }
         },
         
         created() {
-            axios.get('/api/comment')
-                .then(response => this.comments = response.data);
             axios.get('/api/user/get-username')
                 .then(response => this.user = response.data);
         },
@@ -39,8 +43,13 @@
 		methods: {
             addComment(comment) {
                 this.comments.unshift(comment);
+                this.$refs.vpaginator.fetchData();
                 window.scrollTo(0,0);
-			}
+			},
+
+            updateResource(data){
+                this.comments = data
+            }
 		}
     }
 </script>

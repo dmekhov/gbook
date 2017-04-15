@@ -9,6 +9,8 @@
 
 					<div class="panel-body" v-text="comment.text"></div>
 				</div>
+
+                <vue-paginator :resource_url="resource_url" ref="vpaginator" @update="updateResource" class="pagination"></vue-paginator>
 			</div>
 		</div>
 	</div>
@@ -16,20 +18,23 @@
 
 <script>
     export default {
+        components: { VuePaginator },
+
         data() {
             return {
-                comments: []
+                comments: [],
+                resource_url: '/api/personal'
+            }
+        },
+
+        methods: {
+            updateResource(data){
+                this.comments = data
             }
         },
         
         created() {
-            let url = this.$route.params.id ? '/api/user/' + this.$route.params.id : '/api/personal';
-            axios.get(url)
-                .then(response => this.comments = response.data)
-                .catch(function (error) {
-                    if(error.response && error.response.status == 401) window.location.href = "/";
-                });
-
+            if(this.$route.params.id) this.resource_url = '/api/user/' + this.$route.params.id;
         }
     }
 </script>

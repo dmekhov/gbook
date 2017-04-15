@@ -17,7 +17,7 @@ class UserController extends Controller
 	public function show(User $user)
 	{
 		if(!$user->id) $user = Auth::user();
-		$items = $user->comments()->latest()->leftJoin("users", "users.id", "=", "comments.user_id")->get(['users.name as username', 'comments.*']);
+		$items = $user->comments()->latest()->leftJoin("users", "users.id", "=", "comments.user_id")->select(['users.name as username', 'comments.*'])->paginate(5);
 
 		return $items;
 	}

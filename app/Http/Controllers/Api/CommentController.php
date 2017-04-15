@@ -11,7 +11,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $items = Comment::latest()->leftJoin("users", "users.id", "=", "comments.user_id")->get(['users.name as username', 'comments.*']);
+        $items = Comment::latest()->leftJoin("users", "users.id", "=", "comments.user_id")->select(['users.name as username', 'comments.*'])->paginate(5);
         return $items;
     }
 
