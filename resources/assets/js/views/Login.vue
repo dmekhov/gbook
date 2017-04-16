@@ -8,23 +8,21 @@
                         <form class="form-horizontal" role="form" @submit.prevent="onSubmit" @keyup="form.errors.clear()">
                             <input type="hidden" name="_token" :value="csrf">
 
-                            <div class="form-group">
+                            <div class="form-group" v-bind:class="{'has-error': form.errors.has('email')}">
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" v-model="form.email" required autofocus>
-
-
+                                    <span class="help-block" v-if="form.errors.has('email')"><strong v-text="form.errors.get('email')"></strong></span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" v-bind:class="{'has-error': form.errors.has('password')}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" v-model="form.password" required>
-
-
+                                    <span class="help-block" v-if="form.errors.has('password')"><strong v-text="form.errors.get('password')"></strong></span>
                                 </div>
                             </div>
 
