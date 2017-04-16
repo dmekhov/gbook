@@ -8,11 +8,14 @@ let routes = [
     {
         path: '/user/:id',
         component: require('./views/User')
-    }
-    ,
+    },
     {
         path: '/personal',
         component: require('./views/User')
+    },
+    {
+        path: '/login',
+        component: require('./views/Login')
     }
 ];
 

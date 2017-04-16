@@ -1,6 +1,6 @@
 <template>
 	<div class="panel panel-default" id="message-form">
-		<div class="panel-heading" v-text="user"></div>
+		<div class="panel-heading" v-text="user.name"></div>
 		<form class="panel-body" @submit.prevent="onSubmit" @keyup="form.errors.clear()">
 			<div class="form-group" v-bind:class="{'has-error': form.errors.has('text')}">
 				<label for="text">Message</label>

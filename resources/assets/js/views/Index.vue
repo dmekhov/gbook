@@ -31,14 +31,11 @@
             return {
                 comments: [],
                 resource_url: '/api/comment',
-				user: 'Guest',
+
             }
         },
-        
-        created() {
-            axios.get('/api/user/get-username')
-                .then(response => this.user = response.data);
-        },
+
+        props: ['user'],
 
 		methods: {
             addComment(comment) {
